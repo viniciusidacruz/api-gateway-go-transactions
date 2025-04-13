@@ -48,8 +48,8 @@ func ToInvoice(input *CreateInvoiceInput, accountID string) (*domain.Invoice, er
 	return domain.NewInvoice(accountID, input.Amount, input.Description, input.PaymentType, card)
 }
 
-func FromInvoice(invoice *domain.Invoice) InvoiceOutput {
-	return InvoiceOutput{
+func FromInvoice(invoice *domain.Invoice) *InvoiceOutput {
+	return &InvoiceOutput{
 		ID: invoice.ID,
 		AccountID: invoice.AccountID,
 		Amount: invoice.Amount,
