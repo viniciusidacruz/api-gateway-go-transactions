@@ -10,6 +10,8 @@ import (
 	_ "github.com/lib/pq"
 	"github.com/viniciusidacruz/api-gateway-go-transactions/internal/modules/account/repository"
 	"github.com/viniciusidacruz/api-gateway-go-transactions/internal/modules/account/services"
+	invoiceRepository "github.com/viniciusidacruz/api-gateway-go-transactions/internal/modules/invoice/repository"
+	"github.com/viniciusidacruz/api-gateway-go-transactions/internal/modules/invoice/service"
 	"github.com/viniciusidacruz/api-gateway-go-transactions/internal/web/server"
 )
 
@@ -47,8 +49,11 @@ func main() {
 	accountRepository := repository.NewAccountRepository(db)
 	accountService := services.NewAccountService(accountRepository)
 
+	invoiceRepository := invoiceRepository.NewInvoiceRepository(db)
+	invoiceService := service.NewInvoiceService(*accountService, invoiceRepository)
+
 	port := getEnv("HTTP_PORT", "8080")
-	server := server.NewServer(port, accountService)
+	server := server.NewServer(port, accountService, invoiceService)
 
 	server.ConfigureRoutes()
 	server.Start()

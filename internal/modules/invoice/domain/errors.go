@@ -7,3 +7,4 @@ var (
 	ErrInvalidAmount = errors.New("invalid amount")
 	ErrInvalidStatus = errors.New("invalid status")
 	ErrUnauthorizedAccess = errors.New("unauthorized access")
+)

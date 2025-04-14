@@ -1,4 +1,4 @@
-package repository
+package invoiceRepository
 
 import (
 	"database/sql"

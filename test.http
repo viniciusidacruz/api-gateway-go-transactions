@@ -8,9 +8,37 @@ Content-Type: application/json
 
 {
     "name": "John Doe",
-    "email": "john.doe@example.com"
+    "email": "john.doe9@example.com"
 }
 
 ### Get Account
 GET {{url}}/accounts
+X-API-Key: {{apiKey}}
+
+### Create Invoice
+# @name createInvoice
+POST {{url}}/invoice
+X-API-Key: {{apiKey}}
+Content-Type: application/json
+
+{
+    "amount": 100,
+    "description": "Test Invoice",
+    "payment_type": "credit_card",
+    "card_number": "1234567890121234",
+    "cvv": "123",
+    "expiration_month": 2,
+    "expiration_year": 2025,
+    "holder_name": "John Doe"
+}
+
+### Obter uma fatura especifica
+@invoiceId = {{createInvoice.response.body.id}}
+
+GET {{url}}/invoice/{{invoiceId}}
+X-API-Key: {{apiKey}}
+
+### Obter todas as faturas
+# @name getAllInvoices
+GET {{url}}/invoice
 X-API-Key: {{apiKey}}
